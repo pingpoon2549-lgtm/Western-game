@@ -1,0 +1,60 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "data/objects1.tsx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "data/fence1.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.3733,
+            "scaleInEditor": 0.07
+        },
+        "data/ground1.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 0.07
+        },
+        "data/map1.tmx": {
+            "scale": 0.15,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 1790,
+                "y": 2040
+            }
+        },
+        "data/objects1.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.0624,
+            "scaleInEditor": 0.07
+        }
+    },
+    "last.imagePath": "/Users/natchaaksornpim/PycharmProjects/Western Shooter/graphics/objects",
+    "map.height": 60,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "map.width": 60,
+    "openFiles": [
+        "data/map1.tmx",
+        "data/ground1.tsx",
+        "data/fence1.tsx",
+        "data/objects1.tsx"
+    ],
+    "project": "map.tiled-project",
+    "recentFiles": [
+        "data/map1.tmx",
+        "data/ground1.tsx",
+        "data/fence1.tsx",
+        "data/objects1.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    },
+    "tileset.type": 1
+}
