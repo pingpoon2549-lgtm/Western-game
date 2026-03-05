@@ -3,33 +3,51 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "data/objects1.tsx",
+    "activeFile": "data/map1.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
+        "data/fence.tsx": {
+            "scaleInDock": 1
+        },
         "data/fence1.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 0.3733,
-            "scaleInEditor": 0.07
+            "scaleInEditor": 0.21
+        },
+        "data/ground.tsx": {
+            "scaleInDock": 1
         },
         "data/ground1.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 0.5,
-            "scaleInEditor": 0.07
+            "scaleInEditor": 0.21
+        },
+        "data/map.tmx": {
+            "scale": 0.182578125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1919.7261446298667,
+                "y": 1922.4646983311936
+            }
         },
         "data/map1.tmx": {
-            "scale": 0.15,
-            "selectedLayer": 3,
+            "scale": 0.5121,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1790,
-                "y": 2040
+                "x": 1920.5233352860769,
+                "y": 1919.5469634836948
             }
+        },
+        "data/objects.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
         },
         "data/objects1.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.0624,
-            "scaleInEditor": 0.07
+            "scaleInEditor": 0.21
         }
     },
     "last.imagePath": "/Users/natchaaksornpim/PycharmProjects/Western Shooter/graphics/objects",
@@ -42,14 +60,16 @@
         "data/map1.tmx",
         "data/ground1.tsx",
         "data/fence1.tsx",
-        "data/objects1.tsx"
+        "data/objects1.tsx",
+        "data/map.tmx"
     ],
     "project": "map.tiled-project",
     "recentFiles": [
-        "data/map1.tmx",
-        "data/ground1.tsx",
+        "data/map.tmx",
+        "data/objects1.tsx",
         "data/fence1.tsx",
-        "data/objects1.tsx"
+        "data/ground1.tsx",
+        "data/map1.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

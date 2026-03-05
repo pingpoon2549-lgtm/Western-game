@@ -1,6 +1,8 @@
 import pygame, sys
 from settings import *
 from player import *
+from pytmx.util_pygame import load_pygame
+from sprite import *
 
 # ----start class---
 class Game :
@@ -15,6 +17,14 @@ class Game :
 
     def setup(self):
         self.player = Player((200, 200), self.all_sprites, PATHS['player'],None)
+        tmx_map = load_pygame('../data/map1.tmx')
+        for x,y, surf in tmx_map.get_layer_by_name('Fence').tiles():
+            Sprite((x * 64, y * 64), surf, self.all_sprites)
+        for obj in tmx_map.get_layer_by_name('Object'):
+            Sprite((obj.x, obj.y), obj.image, self.all_sprites)
+        for obj in tmx_map.get_layer_by_name('Entities'):
+            if obj.name == 'Player':
+                self.player = Player((obj.x, obj.y), self.all_sprites, PATHS['player'], None)
 
     def run(self):
         while True:
@@ -50,11 +60,11 @@ class AllSprites(pygame.sprite.Group) :
         # -- วาดพื้นหลัง --
         self.display_surface.blit(self.bg, -self.offset)
         # -- วาด Sprite ทุกตัว --
-        for sprite in self.sprites():
+        #for sprite in self.sprites():
+        for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
             offset_rect = sprite.image.get_rect(center = sprite.rect.center)
             offset_rect.center -= self.offset
             self.display_surface.blit(sprite.image, offset_rect)
-
 
 if __name__ == '__main__':
     game = Game()
