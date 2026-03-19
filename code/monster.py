@@ -16,6 +16,8 @@ class Monster:
         return (distance, direction)
 
     def face_player(self):
+        if self.attacking:
+            return
         distance, direction = self.get_player_distance_direction()
 
         if distance < self.notice_radius:
@@ -31,6 +33,8 @@ class Monster:
                     self.status = 'down_idle'
 
     def walk_to_player(self):
+        if self.attacking:
+            return
         distance, direction = self.get_player_distance_direction()
 
         if self.attack_radius < distance < self.walk_radius:
@@ -48,7 +52,7 @@ class Coffin(Entity, Monster):
         # --กำหนดรัศมี AI--
         self.notice_radius = 550
         self.walk_radius = 400
-        self.attack_radius = 50
+        self.attack_radius = 100
 
     def attack(self):
         distance = self.get_player_distance_direction()[0]
