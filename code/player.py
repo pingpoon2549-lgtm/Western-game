@@ -77,5 +77,6 @@ class Player(Entity):
         self.input()
         self.move(dt)
         self.animate(dt)
+        self.vulnerability_timer()
 
 

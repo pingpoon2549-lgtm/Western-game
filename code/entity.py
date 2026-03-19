@@ -21,6 +21,9 @@ class Entity(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(-self.rect.width * 0.5, -self.rect.height/2)
         self.collision_sprites = collision_sprites
         self.attacking = False
+        self.health = 3
+        self.is_vulnerable = True
+        self.hit_time = None
 
     def import_assets(self, path):
         self.animations = {}
@@ -40,7 +43,7 @@ class Entity(pygame.sprite.Sprite):
                     #print(key)
                     # --- เก็บใส่ Dictionary ---
                     self.animations[key].append(surf)
-                    print(f"path: {path}, key: {key}")
+                    #print(f"path: {path}, key: {key}")
 
     def move(self, dt):
         if self.direction.magnitude()!=0:
@@ -76,3 +79,17 @@ class Entity(pygame.sprite.Sprite):
                         self.hitbox.top = sprite.hitbox.bottom
                     self.rect.centery = self.hitbox.centery
                     self.pos.y = self.hitbox.centery
+
+    def damage(self):
+        if self.is_vulnerable:
+            self.health -= 1
+            self.is_vulnerable = False
+            self.hit_time = pygame.time.get_ticks()
+            print(f'Ouch! Health: {self.health}')
+
+    def vulnerability_timer(self):
+        if not self.is_vulnerable:
+            current_time = pygame.time.get_ticks()
+            if current_time - self.hit_time >= 400:
+                self.is_vulnerable = True
+
