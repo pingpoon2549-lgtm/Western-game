@@ -33,9 +33,9 @@ class Game :
             if obj.name == 'Player':
                 self.player = Player((obj.x, obj.y), self.all_sprites, PATHS['player'], self.obstacles, create_bullet = self.create_bullet)
             if obj.name == 'Coffin':
-                Coffin((obj.x, obj.y), self.all_sprites, PATHS['coffin'],self.obstacles)
+                Coffin((obj.x, obj.y), self.all_sprites, PATHS['coffin'],self.obstacles, self.player)
             if obj.name == 'Cactus':
-                 Cactus((obj.x, obj.y), self.all_sprites, PATHS['cactus'], self.obstacles)
+                 Cactus((obj.x, obj.y), self.all_sprites, PATHS['cactus'], self.obstacles, self.player)
 
     def run(self):
         while True:
