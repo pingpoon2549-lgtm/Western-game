@@ -33,11 +33,11 @@
             }
         },
         "data/map1.tmx": {
-            "scale": 0.5121,
-            "selectedLayer": 2,
+            "scale": 0.3358,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1920.5233352860769,
-                "y": 1919.5469634836948
+                "x": 1922.275163787969,
+                "y": 1134.6039309112568
             }
         },
         "data/objects.tsx": {

@@ -1,10 +1,10 @@
 import pygame, sys
-from plotly.figure_factory import create_bullet
 
 from settings import *
 from player import *
 from pytmx.util_pygame import load_pygame
 from sprite import *
+from monster import Coffin, Cactus
 
 # ----start class---
 class Game :
@@ -20,7 +20,6 @@ class Game :
         self.bullets = pygame.sprite.Group()
         self.setup()
 
-
     def create_bullet(self, pos, direction):
         Bullet(pos, direction, self.bullet_surf, [self.all_sprites, self.bullets])
 
@@ -33,6 +32,10 @@ class Game :
         for obj in tmx_map.get_layer_by_name('Entities'):
             if obj.name == 'Player':
                 self.player = Player((obj.x, obj.y), self.all_sprites, PATHS['player'], self.obstacles, create_bullet = self.create_bullet)
+            if obj.name == 'Coffin':
+                Coffin((obj.x, obj.y), self.all_sprites, PATHS['coffin'],self.obstacles)
+            if obj.name == 'Cactus':
+                 Cactus((obj.x, obj.y), self.all_sprites, PATHS['cactus'], self.obstacles)
 
     def run(self):
         while True:
