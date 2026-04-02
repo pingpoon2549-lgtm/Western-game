@@ -15,7 +15,7 @@ class Bullet(pygame.sprite.Sprite):
         # --การเคลื่อนไหวแบบ float ---
         self.pos = pygame.math.Vector2(self.rect.center)
         self.direction = direction
-        self.speed = 400
+        self.speed = 100
 
     def update(self, dt):
         self.pos += self.direction * self.speed * dt

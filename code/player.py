@@ -1,3 +1,4 @@
+import sys
 from unittest import case
 
 import pygame
@@ -72,11 +73,17 @@ class Player(Entity):
         if self.attacking:
             self.status = self.status.split('_')[0] + '_attack'
 
+    def check_death(self):
+        if self.health <= 0:
+            pygame.quit()
+            sys.exit()
+
     def update(self, dt):
         self.get_status()
         self.input()
         self.move(dt)
         self.animate(dt)
         self.vulnerability_timer()
+        self.check_death()
 
 

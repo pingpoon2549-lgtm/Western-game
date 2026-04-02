@@ -13,11 +13,16 @@ class Game :
         # create window
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption('Western Shoter')
+
         self.clock = pygame.time.Clock()
+
         self.all_sprites = AllSprites()
         self.obstacles = pygame.sprite.Group()
-        self.bullet_surf = pygame.image.load('../graphics/other/particle.png')
+        self.monsters = pygame.sprite.Group()
         self.bullets = pygame.sprite.Group()
+
+        self.bullet_surf = pygame.image.load('../graphics/other/particle.png')
+
         self.setup()
 
     def create_bullet(self, pos, direction):
@@ -33,9 +38,26 @@ class Game :
             if obj.name == 'Player':
                 self.player = Player((obj.x, obj.y), self.all_sprites, PATHS['player'], self.obstacles, create_bullet = self.create_bullet)
             if obj.name == 'Coffin':
-                Coffin((obj.x, obj.y), self.all_sprites, PATHS['coffin'],self.obstacles, self.player)
+                Coffin((obj.x, obj.y), [self.all_sprites, self.monsters], PATHS['coffin'],self.obstacles, self.player)
             if obj.name == 'Cactus':
-                 Cactus((obj.x, obj.y), self.all_sprites, PATHS['cactus'], self.obstacles, self.player, self.create_bullet)
+                 Cactus((obj.x, obj.y), [self.all_sprites, self.monsters], PATHS['cactus'], self.obstacles, self.player, create_bullet = self.create_bullet)
+
+    def bullet_collision(self):
+        # print('bullet_collision')
+        # ลบกระสุนทิ้ง
+        for obstacle in self.obstacles.sprites():
+            pygame.sprite.spritecollide(obstacle, self.bullets, True, pygame.sprite.collide_mask)
+        # ลบกระสุน+ศัตรูเจ็บ
+        for bullet in self.bullets.sprites():
+            sprites = pygame.sprite.spritecollide(bullet, self.monsters, False, pygame.sprite.collide_mask)
+
+            if sprites:
+                bullet.kill()
+                for sprite in sprites:
+                    sprite.damage()
+
+        if pygame.sprite.spritecollide(self.player, self.bullets, True, pygame.sprite.collide_mask):
+            self.player.damage()
 
     def run(self):
         while True:
@@ -50,6 +72,7 @@ class Game :
 
             # update
             self.all_sprites.update(dt)
+            self.bullet_collision()
 
             self.display_surface.fill('black')
             self.all_sprites.customize_draw(self.player)

@@ -85,7 +85,7 @@ class Entity(pygame.sprite.Sprite):
             self.health -= 1
             self.is_vulnerable = False
             self.hit_time = pygame.time.get_ticks()
-            print(f'Ouch! Health: {self.health}')
+            #print(f'Ouch! Health: {self.health}')
 
     def vulnerability_timer(self):
         if not self.is_vulnerable:
@@ -93,3 +93,9 @@ class Entity(pygame.sprite.Sprite):
             if current_time - self.hit_time >= 400:
                 self.is_vulnerable = True
 
+    def check_death(self):
+        if self.health <= 0:
+            self.kill()
+
+    def update(self, dt):
+        self.check_death()

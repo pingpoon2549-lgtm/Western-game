@@ -91,10 +91,11 @@ class Coffin(Entity, Monster):
 
 class Cactus(Entity, Monster):
     def __init__(self, pos, groups, path, collision_sprites, player, create_bullet):
-        super().__init__(pos, groups, path, collision_sprites)
+        super().__init__(pos, groups, path, collision_sprites )
 
         self.create_bullet = create_bullet
         self.bullet_shot = False
+
         self.speed = 150
         self.player = player
         # --กำหนดรัศมี AI--
@@ -105,7 +106,7 @@ class Cactus(Entity, Monster):
     def attack(self):
         distance = self.get_player_distance_direction()[0]
 
-        if distance < self.attacking_radius and not self.attacking:
+        if distance < self.attack_radius and not self.attacking:
             self.attacking = True
             self.frame_index = 0
             self.bullet_shot = False
@@ -117,8 +118,11 @@ class Cactus(Entity, Monster):
 
         if int(self.frame_index) == 6 and self.attacking and not self.bullet_shot:
             direction = self.get_player_distance_direction()[1]
+            #bullet_start_pos = self.rect.center + direction * 40
+            pos = self.rect.center + direction * 40
 
-            self.create_bullet(bullet_start_pos, direction)
+            # self.create_bullet(bullet_start_pos , direction)
+            self.create_bullet(pos, direction) #ยิง
             self.bullet_shot = True
 
         if self.frame_index >= len(current_animation):
@@ -131,5 +135,6 @@ class Cactus(Entity, Monster):
     def update(self, dt):
         self.face_player()
         self.walk_to_player()
+        self.attack()
         self.move(dt)
         self.animate(dt)
