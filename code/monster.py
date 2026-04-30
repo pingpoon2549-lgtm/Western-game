@@ -119,7 +119,7 @@ class Cactus(Entity, Monster):
         if int(self.frame_index) == 6 and self.attacking and not self.bullet_shot:
             direction = self.get_player_distance_direction()[1]
             #bullet_start_pos = self.rect.center + direction * 40
-            pos = self.rect.center + direction * 40
+            pos = self.rect.center + direction * 80
 
             # self.create_bullet(bullet_start_pos , direction)
             self.create_bullet(pos, direction) #ยิง
