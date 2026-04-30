@@ -88,6 +88,8 @@ class Coffin(Entity, Monster):
         self.attack()
         self.move(dt)
         self.animate(dt)
+        self.vulnerability_timer()
+        self.check_death()
 
 class Cactus(Entity, Monster):
     def __init__(self, pos, groups, path, collision_sprites, player, create_bullet):
@@ -139,3 +141,5 @@ class Cactus(Entity, Monster):
         self.attack()
         self.move(dt)
         self.animate(dt)
+        self.vulnerability_timer()
+        self.check_death()

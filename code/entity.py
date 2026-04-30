@@ -7,6 +7,8 @@ class Entity(pygame.sprite.Sprite):
     def __init__(self, pos, groups, path, collision_sprites):
         super().__init__(groups)
 
+        
+
         self.import_assets(path)
         self.frame_index = 0
         self.status = 'down'
