@@ -66,7 +66,6 @@ class Game :
 
     def reset_game(self):
         self.player.pos = vector(self.startpos.x, self.startpos.y)
-        print(self.startpos)
         self.player.dead = False
         self.player.health = 3
 
@@ -96,13 +95,15 @@ class Game :
 
 
             # update
-            self.all_sprites.update(dt)
-            self.bullet_collision()
+            if not self.player.dead:
+                self.all_sprites.update(dt)
+                self.bullet_collision()
 
-            self.display_surface.fill('black')
-            self.all_sprites.customize_draw(self.player)
+                self.display_surface.fill('black')
+                self.all_sprites.customize_draw(self.player)
 
-            if self.player.dead:
+            #if self.player.dead:
+            else :
                 gameover_rect = self.gameover.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
                 self.display_surface.blit(self.gameover, gameover_rect)
             #self.all_sprites.draw(self.display_surface)
