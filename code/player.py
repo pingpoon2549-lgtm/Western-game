@@ -25,6 +25,7 @@ class Player(Entity):
             if self.attacking:
                 self.attacking = False
         self.image = current_animation[int(self.frame_index)]
+        self.mask = pygame.mask.from_surface(self.image)
 
         # -- ยิงกระสุนเฟรมที่ 2 ---
         if int(self.frame_index) == 2 and self.attacking and not self.bullet_shot:
@@ -32,6 +33,7 @@ class Player(Entity):
 
             self.create_bullet(bullet_start_pos, self.bullet_direction)
             self.bullet_shot = True
+            self.shoot_sound.play()
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -89,6 +91,7 @@ class Player(Entity):
         self.input()
         self.move(dt)
         self.animate(dt)
+        self.blink()
         self.vulnerability_timer()
         self.check_death()
 

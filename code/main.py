@@ -24,6 +24,10 @@ class Game :
 
         self.bullet_surf = pygame.image.load('../graphics/other/particle.png')
         self.gameover = pygame.image.load('../graphics/GAME OVER.png').convert_alpha()
+        # โหลดและเล่นเพลง
+        self.music = pygame.mixer.Sound('../sound/music.mp3')
+        self.music.set_volume(0.5)
+        self.music.play(loops=-1)
 
         self.setup()
 

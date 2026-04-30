@@ -88,6 +88,7 @@ class Coffin(Entity, Monster):
         self.attack()
         self.move(dt)
         self.animate(dt)
+        self.blink()
         self.vulnerability_timer()
         self.check_death()
 
@@ -113,6 +114,7 @@ class Cactus(Entity, Monster):
             self.frame_index = 0
             self.bullet_shot = False
             self.status = self.status.split('_')[0] + '_attack'
+            self.shoot_sound.play()
 
     def animate(self, dt):
         current_animation = self.animations[self.status]
@@ -141,5 +143,6 @@ class Cactus(Entity, Monster):
         self.attack()
         self.move(dt)
         self.animate(dt)
+        self.blink()
         self.vulnerability_timer()
         self.check_death()

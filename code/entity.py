@@ -2,12 +2,11 @@ import pygame
 from pygame.math import Vector2 as vector
 from os import walk
 import os.path
+from math import sin
 
 class Entity(pygame.sprite.Sprite):
     def __init__(self, pos, groups, path, collision_sprites):
         super().__init__(groups)
-
-        
 
         self.import_assets(path)
         self.frame_index = 0
@@ -27,6 +26,11 @@ class Entity(pygame.sprite.Sprite):
         self.health = 3
         self.is_vulnerable = True
         self.hit_time = None
+        # ---Sound set up----
+        self.hit_sound = pygame.mixer.Sound('../sound/hit.mp3')
+        self.hit_sound.set_volume(0.1)
+        self.shoot_sound = pygame.mixer.Sound('../sound/bullet.wav')
+        self.shoot_sound.set_volume(0.2)
 
     def import_assets(self, path):
         self.animations = {}
@@ -89,6 +93,22 @@ class Entity(pygame.sprite.Sprite):
             self.is_vulnerable = False
             self.hit_time = pygame.time.get_ticks()
             #print(f'Ouch! Health: {self.health}')
+            self.hit_sound.play()
+
+    def wave_value(self):
+        value = sin(pygame.time.get_ticks())
+        if value >= 0:
+            return True
+        else:
+            return False
+
+    def blink(self):
+        if not self.is_vulnerable:
+            if self.wave_value:
+                mask = pygame.mask.from_surface(self.image)
+                white_surf = mask.to_surface()
+                white_surf.set_colorkey((0, 0, 0))
+                self.image = white_surf
 
     def vulnerability_timer(self):
         if not self.is_vulnerable:
