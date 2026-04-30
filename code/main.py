@@ -20,12 +20,15 @@ class Game :
         self.obstacles = pygame.sprite.Group()
         self.monsters = pygame.sprite.Group()
         self.bullets = pygame.sprite.Group()
+        self.startpos = vector(0,0)
 
         self.bullet_surf = pygame.image.load('../graphics/other/particle.png')
+        self.gameover = pygame.image.load('../graphics/GAME OVER.png').convert_alpha()
 
         self.setup()
 
     def create_bullet(self, pos, direction):
+        print("create_bullet")
         Bullet(pos, direction, self.bullet_surf, [self.all_sprites, self.bullets])
 
     def setup(self):
@@ -36,6 +39,8 @@ class Game :
             Sprite((obj.x, obj.y), obj.image, [self.all_sprites, self.obstacles])
         for obj in tmx_map.get_layer_by_name('Entities'):
             if obj.name == 'Player':
+                #global startpos
+                self.startpos = vector(obj.x, obj.y)
                 self.player = Player((obj.x, obj.y), self.all_sprites, PATHS['player'], self.obstacles, create_bullet = self.create_bullet)
             if obj.name == 'Coffin':
                 Coffin((obj.x, obj.y), [self.all_sprites, self.monsters], PATHS['coffin'],self.obstacles, self.player)
@@ -59,6 +64,13 @@ class Game :
         if pygame.sprite.spritecollide(self.player, self.bullets, True, pygame.sprite.collide_mask):
             self.player.damage()
 
+    def reset_game(self):
+        self.player.pos = vector(self.startpos.x, self.startpos.y)
+        print(self.startpos)
+        self.player.dead = False
+        self.player.health = 3
+
+
     def run(self):
         while True:
             # Event loop
@@ -67,8 +79,21 @@ class Game :
                     pygame.quit()
                     sys.exit()
 
+                if event.type == pygame.KEYDOWN and self.player.dead:
+                    if event.key == pygame.K_y:
+                        self.reset_game()
+                    elif event.key == pygame.K_n:
+                        pygame.quit()
+                        sys.exit()
+
             #Delta time
             dt = self.clock.tick()/1000
+
+            #keys = pygame.key.get_pressed()
+            #if self.health <= 0:
+                #if keys[pygame.K_SPACE]:
+                    #self.health = 3
+
 
             # update
             self.all_sprites.update(dt)
@@ -76,6 +101,10 @@ class Game :
 
             self.display_surface.fill('black')
             self.all_sprites.customize_draw(self.player)
+
+            if self.player.dead:
+                gameover_rect = self.gameover.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
+                self.display_surface.blit(self.gameover, gameover_rect)
             #self.all_sprites.draw(self.display_surface)
 
             pygame.display.update()

@@ -15,6 +15,7 @@ class Player(Entity):
         #self.hitbox = self.rect.inflate(0, -self.rect.height/2)
         self.create_bullet = create_bullet
         self.bullet_shot = False
+        self.dead = False
 
     def animate(self,dt):
         current_animation = self.animations[self.status]
@@ -74,9 +75,14 @@ class Player(Entity):
             self.status = self.status.split('_')[0] + '_attack'
 
     def check_death(self):
-        if self.health <= 0:
-            pygame.quit()
-            sys.exit()
+       if self.health <= 0:
+            self.health = 0
+            self.dead = True
+            self.direction = vector()
+            self.attacking = False
+
+            #pygame.quit()
+            #sys.exit()
 
     def update(self, dt):
         self.get_status()

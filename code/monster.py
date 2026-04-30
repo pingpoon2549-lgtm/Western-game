@@ -62,7 +62,7 @@ class Coffin(Entity, Monster):
             # print("Attacking")
             self.frame_index = 0
             self.status = self.status.split('_')[0] + '_attack'
-            print(self.status)
+            #print(self.status)
 
     def animate(self, dt):
         current_animation = self.animations[self.status]
@@ -131,6 +131,7 @@ class Cactus(Entity, Monster):
                 self.attacking = False
 
         self.image = current_animation[int(self.frame_index)]
+        self.mask = pygame.mask.from_surface(self.image)
 
     def update(self, dt):
         self.face_player()

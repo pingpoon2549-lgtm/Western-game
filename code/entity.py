@@ -20,6 +20,7 @@ class Entity(pygame.sprite.Sprite):
         # -- collision(การชน) ---
         self.hitbox = self.rect.inflate(-self.rect.width * 0.5, -self.rect.height/2)
         self.collision_sprites = collision_sprites
+        self.mask = pygame.mask.from_surface(self.image)
         self.attacking = False
         self.health = 3
         self.is_vulnerable = True
