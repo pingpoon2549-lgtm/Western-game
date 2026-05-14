@@ -46,7 +46,7 @@ class Game :
                 #global startpos
                 self.startpos = vector(obj.x, obj.y)
                 self.player = Player((obj.x, obj.y), self.all_sprites, PATHS['player'], self.obstacles, create_bullet = self.create_bullet)
-                self.player.health = 999
+                self.player.health = 20
             if obj.name == 'Coffin':
                 Coffin((obj.x, obj.y), [self.all_sprites, self.monsters], PATHS['coffin'],self.obstacles, self.player)
             if obj.name == 'Cactus':
